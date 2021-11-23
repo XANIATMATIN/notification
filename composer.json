@@ -2,7 +2,7 @@
     "name": "matin-utils/notification",
     "description": "a utility for managing notifications",
     "type": "library",
-    "license": "Matin Int Group Licence",
+    "license": "MIT",
     "authors": [
         {
             "name": "aghaie",
