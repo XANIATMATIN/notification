@@ -1,0 +1,30 @@
+{
+    "name": "matin-utils/notification",
+    "description": "a utility for managing notifications",
+    "type": "library",
+    "license": "Matin Int Group Licence",
+    "authors": [
+        {
+            "name": "aghaie",
+            "email": "maryamaghaie2570@gmail.com"
+        }
+    ],
+    "require": {},
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MatinUtils\\Notifications\\ServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "classmap": [],
+        "files": [
+            "Functions.php"
+        ],
+        "psr-4": {
+            "MatinUtils\\Notifications\\": "src/"
+        }
+    }
+}
