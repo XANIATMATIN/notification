@@ -118,7 +118,6 @@ class Notification
 
         try {
             $response = curl_exec($curl);
-            lugWarning(__METHOD__ , [$response,$url,$data,curl_getinfo($curl, CURLINFO_HTTP_CODE)]);
         } catch (\Throwable $th) {
             app('log')->error("cURL Error #:" . $th->getMessage());
         }
@@ -207,13 +206,12 @@ class Notification
     {
         $data['pid'] = app('log-system')->getPid();
         $socketData = json_encode($data);
-        $res = $this->socketClient->notLive($socketData);
-        lugWarning(__METHOD__ , [$res]);
-        if (!$res) {
+
+        if (!$this->socketClient->notLive($socketData)) {
             return $this->httpSendNotification($data);
         }
+
         return ['status' => true];
-       
     }
 
     public function sendCustomNotification(string $medium, array $configs, array $audience, array $template)

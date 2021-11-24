@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "matin-utils/log-system": "dev-main",
         "matin-utils/easy-socket": "^1.0"
     },
     "minimum-stability": "dev",
