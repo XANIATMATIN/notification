@@ -9,7 +9,9 @@
             "email": "maryamaghaie2570@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "matin-utils/easy-socket": "^1.0"
+    },
     "minimum-stability": "dev",
     "extra": {
         "laravel": {
