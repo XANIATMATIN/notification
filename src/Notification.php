@@ -2,8 +2,6 @@
 
 namespace MatinUtils\Notifications;
 
-use MatinUtils\EasySocket\Client;
-
 class Notification
 {
     public function setServerConfigs(string $name, string $medium, array $configs)
@@ -154,13 +152,11 @@ class Notification
                     return 'socket';
                 }
             } else {
-                if (class_exists(Client::class)) {
-                    $host = config('notification.easySocket.host');
-                    if (!empty($host)) {
-                        $this->socketClient = new Client($host);
-                        if ($this->socketClient->isConnected) {
-                            return 'socket';
-                        }
+                $host = config('notification.easySocket.host');
+                if (!empty($host)) {
+                    $this->socketClient = new SocketClient($host);
+                    if ($this->socketClient->isConnected) {
+                        return 'socket';
                     }
                 }
             }
@@ -207,7 +203,7 @@ class Notification
         $data['pid'] = app('log-system')->getPid();
         $socketData = json_encode($data);
 
-        if (!$this->socketClient->notLive($socketData)) {
+        if (!$this->socketClient->send($socketData)) {
             return $this->httpSendNotification($data);
         }
 
