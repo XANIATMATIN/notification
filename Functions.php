@@ -1,23 +1,28 @@
 <?php
 
-function setEmailConfigs(string $serverName, string $address, string $username, string $password, string $host, string $port, string $driver, string $name, string $encryption)
+function setEmailConfigs(string $serverName, array $data)
 {
     $configs = [
-        'driver' => $driver,
-        'host' => $host,
-        'port' => $port,
-        'username' => $username,
-        'password' => $password,
-        'encryption' => $encryption,
+        'driver' => $data['driver'],
+        'host' => $data['host'],
+        'port' => $data['port'],
+        'username' => $data['username'],
+        'password' => $data['password'],
+        'encryption' => $data['encryption'],
         'from' => [
-            'name' => $name,
-            'address' => $address
+            'name' => $data['name'],
+            'address' => $data['address']
         ]
     ];
     return app('notifications')->setServerConfigs($serverName, 'email', $configs);
 }
 
-function getEmailConfigs(string $name)
+function setSmsConfigs(string $serverName, array $data)
+{
+    return app('notifications')->setServerConfigs($serverName, 'sms', $data);
+}
+
+function getServerConfigs(string $name)
 {
     return app('notifications')->getServerConfigs($name);
 }
