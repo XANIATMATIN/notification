@@ -131,12 +131,13 @@ class Notification
         return json_decode($response, true);
     }
 
-    public function sendNotification(string $notification, array $audience, array $variables, string $preferedSendType = 'socket')
+    public function sendNotification(string $notification, array $audience, array $variables, string $additionToSubject = '', string $preferedSendType = 'socket')
     {
         $data = [
             'notification' => $notification,
             'audience' => $audience,
-            'variables' => $variables
+            'variables' => $variables,
+            'additionToSubject' => $additionToSubject
         ];
         $sendType = $this->sendType($preferedSendType);
 
