@@ -8,7 +8,7 @@ function setEmailConfigs(string $serverName, array $data)
         'port' => $data['port'],
         'username' => $data['username'],
         'password' => $data['password'],
-        'encryption' => $data['encryption'],
+        'encryption' => $data['encryption'] ?? '',
         'from' => [
             'name' => $data['name'],
             'address' => $data['address']
