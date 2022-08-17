@@ -33,17 +33,19 @@ class Notification
         try {
             $response = curl_exec($curl);
         } catch (\Throwable $th) {
+            lugError("cURL Error #:" . $th->getMessage(), ['url' => $url, 'data' => http_build_query($data)]);
             app('log')->error("cURL Error #:" . $th->getMessage());
         }
         if ($err = curl_error($curl)) {
-            app('log')->error("cURL Error #:" . $err);
+            app('log')->error("cURL Error #: $err");
+            lugError("cURL Error #: $err", ['url' => $url, 'data' => http_build_query($data)]);
             return false;
         }
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 500) {
-            app('log')->error("cURL Error ", [$response]);
+            app('log')->error("Response status 500", [$response]);
+            lugError("Response status 500", ['url' => $url, 'data' => http_build_query($data), 'response' => $response]);
             return false;
         }
-
         return json_decode($response, true);
     }
 
@@ -74,14 +76,17 @@ class Notification
         try {
             $response = curl_exec($curl);
         } catch (\Throwable $th) {
+            lugError("cURL Error #:" . $th->getMessage(), ['url' => $url, 'data' => http_build_query($data)]);
             app('log')->error("cURL Error #:" . $th->getMessage());
         }
         if ($err = curl_error($curl)) {
-            app('log')->error("cURL Error #:" . $err);
+            app('log')->error("cURL Error #: $err");
+            lugError("cURL Error #: $err", ['url' => $url, 'data' => http_build_query($data)]);
             return false;
         }
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 500) {
-            app('log')->error("cURL Error ", [$response]);
+            app('log')->error("Response status 500", [$response]);
+            lugError("Response status 500", ['url' => $url, 'data' => http_build_query($data), 'response' => $response]);
             return false;
         }
 
@@ -117,14 +122,17 @@ class Notification
         try {
             $response = curl_exec($curl);
         } catch (\Throwable $th) {
+            lugError("cURL Error #:" . $th->getMessage(), ['url' => $url, 'data' => http_build_query($data)]);
             app('log')->error("cURL Error #:" . $th->getMessage());
         }
         if ($err = curl_error($curl)) {
-            app('log')->error("cURL Error #:" . $err);
+            app('log')->error("cURL Error #: $err");
+            lugError("cURL Error #: $err", ['url' => $url, 'data' => http_build_query($data)]);
             return false;
         }
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 500) {
-            app('log')->error("cURL Error ", [$response]);
+            app('log')->error("Response status 500", [$response]);
+            lugError("Response status 500", ['url' => $url, 'data' => http_build_query($data), 'response' => $response]);
             return false;
         }
 
@@ -185,14 +193,17 @@ class Notification
         try {
             $response = curl_exec($curl);
         } catch (\Throwable $th) {
+            lugError("cURL Error #:" . $th->getMessage(), ['url' => $url, 'data' => http_build_query($data)]);
             app('log')->error("cURL Error #:" . $th->getMessage());
         }
         if ($err = curl_error($curl)) {
-            app('log')->error("cURL Error #:" . $err);
+            app('log')->error("cURL Error #: $err");
+            lugError("cURL Error #: $err", ['url' => $url, 'data' => http_build_query($data)]);
             return false;
         }
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 500) {
-            app('log')->error("cURL Error ", [$response]);
+            app('log')->error("Response status 500", [$response]);
+            lugError("Response status 500", ['url' => $url, 'data' => http_build_query($data), 'response' => $response]);
             return false;
         }
 
@@ -239,14 +250,17 @@ class Notification
         try {
             $response = curl_exec($curl);
         } catch (\Throwable $th) {
+            lugError("cURL Error #:" . $th->getMessage(), ['url' => $url, 'data' => http_build_query($data)]);
             app('log')->error("cURL Error #:" . $th->getMessage());
         }
         if ($err = curl_error($curl)) {
-            app('log')->error("cURL Error #:" . $err);
+            app('log')->error("cURL Error #: $err");
+            lugError("cURL Error #: $err", ['url' => $url, 'data' => http_build_query($data)]);
             return false;
         }
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 500) {
-            app('log')->error("cURL Error ", [$response]);
+            app('log')->error("Response status 500", [$response]);
+            lugError("Response status 500", ['url' => $url, 'data' => http_build_query($data), 'response' => $response]);
             return false;
         }
 
