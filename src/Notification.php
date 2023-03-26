@@ -4,6 +4,7 @@ namespace MatinUtils\Notifications;
 
 class Notification
 {
+    protected $socketClient;
     public function setServerConfigs(string $name, string $medium, array $configs)
     {
         $data = [
@@ -162,8 +163,9 @@ class Notification
                 }
             } else {
                 $host = config('notification.easySocket.host');
+                $port = config('notification.easySocket.port');
                 if (!empty($host)) {
-                    $this->socketClient = new SocketClient($host);
+                    $this->socketClient = new SocketClient($host,$port );
                     if ($this->socketClient->isConnected) {
                         return 'socket';
                     }
