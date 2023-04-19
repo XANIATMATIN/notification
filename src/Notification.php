@@ -224,9 +224,8 @@ class Notification
         return ['status' => true];
     }
 
-    public function sendCustomNotification(string $medium, array $audience, array $template)
+    public function sendCustomNotification(string $server, array $audience, array $template)
     {
-        $server = notificationName($medium);
         $url = env('NOTIFICATION_HOST', 'http://notification.api') . "/send/custom";
 
         $data = [
