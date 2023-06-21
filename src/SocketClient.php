@@ -8,11 +8,6 @@ class SocketClient extends EasySocketClient
 {
     public function send($data = '')
     {
-        if ($this->isConnected) {
-            $data .= "\0";
-            return $this->writeOnSocket($data);
-        } else {
-            return false;
-        }
+        return $this->writeOnSocket(app('easy-socket')->prepareMessage($data));
     }
 }

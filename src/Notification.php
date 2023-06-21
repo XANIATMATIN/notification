@@ -157,19 +157,15 @@ class Notification
     {
         $sendType = $preferedSendType == 'http' ? 'http' : config('notification.sendType', 'http');
         if ($sendType == 'socket') {
-            if (!empty($this->socketClient)) {
-                if (($this->socketClient->isConnected)) {
-                    return 'socket';
-                }
-            } else {
+            if (empty($this->socketClient) || !$this->socketClient->isConnected) {
                 $host = config('notification.easySocket.host');
                 $port = config('notification.easySocket.port');
                 if (!empty($host)) {
-                    $this->socketClient = new SocketClient($host,$port );
-                    if ($this->socketClient->isConnected) {
-                        return 'socket';
-                    }
+                    $this->socketClient = new SocketClient($host, $port);
                 }
+            }
+            if ($this->socketClient->isConnected) {
+                return 'socket';
             }
         }
         return 'http';
@@ -215,9 +211,7 @@ class Notification
     public function socketSendNotification(array $data)
     {
         $data['pid'] = app('log-system')->getPid();
-        $socketData = json_encode($data);
-
-        if (!$this->socketClient->send($socketData)) {
+        if (!$this->socketClient->send($data)) {
             return $this->httpSendNotification($data);
         }
 
