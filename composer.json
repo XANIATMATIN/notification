@@ -1,26 +1,10 @@
 {
-    "name": "matin-utils/notification",
-    "description": "a utility for managing notifications",
-    "type": "library",
-    "license": "MIT",
     "authors": [
         {
-            "name": "aghaie",
-            "email": "maryamaghaie2570@gmail.com"
+            "email": "maryamaghaie2570@gmail.com",
+            "name": "aghaie"
         }
     ],
-    "require": {
-        "matin-utils/log-system": "dev-main",
-        "matin-utils/easy-socket": "dev-main"
-    },
-    "minimum-stability": "dev",
-    "extra": {
-        "laravel": {
-            "providers": [
-                "MatinUtils\\Notifications\\ServiceProvider"
-            ]
-        }
-    },
     "autoload": {
         "classmap": [],
         "files": [
@@ -29,5 +13,21 @@
         "psr-4": {
             "MatinUtils\\Notifications\\": "src/"
         }
-    }
+    },
+    "description": "a utility for managing notifications",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MatinUtils\\Notifications\\ServiceProvider"
+            ]
+        }
+    },
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "name": "matin-utils/notification",
+    "require": {
+        "matin-utils/easy-socket": "dev-main",
+        "matin-utils/log-system": "dev-application"
+    },
+    "type": "library"
 }
