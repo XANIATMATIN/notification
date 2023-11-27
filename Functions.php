@@ -27,11 +27,12 @@ function getServerConfigs(string $name)
     return app('notifications')->getServerConfigs($name);
 }
 
-function bindNotification(string $title, string $server, string $subject, string $template)
+function bindNotification(string $title, string $server, string $subject, string $template, array $attachments = [])
 {
     $configs = [
         'template' => $template,
-        'subject' => $subject
+        'subject' => $subject,
+        'attachments' => $attachments
     ];
     return app('notifications')->bind($title, $server, $configs);
 }
