@@ -12,7 +12,8 @@ function setEmailConfigs(string $serverName, array $data)
         'from' => [
             'name' => $data['name'],
             'address' => $data['address']
-        ]
+        ],
+        'testEmail' => $data['testEmail']
     ];
     return app('notifications')->setServerConfigs($serverName, 'email', $configs);
 }
