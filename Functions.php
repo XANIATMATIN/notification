@@ -22,6 +22,11 @@ function setSmsConfigs(string $serverName, array $data)
     return app('notifications')->setServerConfigs($serverName, 'sms', $data);
 }
 
+function setWhatsappConfigs(string $serverName, array $data)
+{
+    return app('notifications')->setServerConfigs($serverName, 'whatsapp', $data);
+}
+
 function getServerConfigs(string $name)
 {
     return app('notifications')->getServerConfigs($name);
