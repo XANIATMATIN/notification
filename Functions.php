@@ -28,6 +28,11 @@ function setWhatsappConfigs(string $serverName, array $data)
     return app('notifications')->setServerConfigs($serverName, 'whatsapp', $data);
 }
 
+function  setTelegramConfigs(string $serverName, array $data)
+{
+    return app('notifications')->setServerConfigs($serverName, 'telegram', $data);
+}
+
 function getServerConfigs(string $name)
 {
     return app('notifications')->getServerConfigs($name);
