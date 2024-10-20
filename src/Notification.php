@@ -210,11 +210,11 @@ class Notification
 
     public function socketSendNotification(array $data)
     {
+        $data['api'] = 'sendNotification';
         $data['pid'] = app('log-system')->getPid();
         if (!$this->socketClient->send($data)) {
             return $this->httpSendNotification($data);
         }
-
         return ['status' => true];
     }
 
