@@ -261,4 +261,61 @@ class Notification
 
         return json_decode($response, true);
     }
+
+    public function getVendors(string $preferedSendType = 'socket')
+    {
+        $sendType = $this->sendType($preferedSendType);
+
+        return $this->{$sendType . 'GetVendors'}();
+    }
+
+    protected function socketGetVendors()
+    {
+        $data = [];
+        $data['api'] = 'getVendors';
+        $data['pid'] = app('log-system')->getPid();
+        $data['withResponse'] = true;
+        $socketClientResponse = json_decode($this->socketClient->send($data), true);
+        if (!$socketClientResponse['status'] ?? false) {
+            return $this->httpGetVendors();
+        }
+        return $socketClientResponse['data'] ?? [];
+    }
+
+    protected function httpGetVendors()
+    {
+        $url = env('NOTIFICATION_HOST', 'notificatin.api') . '/vendors';
+
+        $options = [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 0,
+            CURLOPT_TIMEOUT_MS => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => ['pid: ' . app('log-system')->getpid()],
+        ];
+
+        $curl = curl_init();
+        curl_setopt_array($curl, $options);
+        try {
+            $response = curl_exec($curl);
+        } catch (\Throwable $th) {
+            lugError("cURL Error #:" . $th->getMessage(), ['url' => $url]);
+            app('log')->error("cURL Error #:" . $th->getMessage());
+        }
+        if ($err = curl_error($curl)) {
+            app('log')->error("cURL Error #: $err");
+            lugError("cURL Error #: $err", ['url' => $url]);
+            return false;
+        }
+        if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 500) {
+            app('log')->error("Response status 500", [$response]);
+            lugError("Response status 500", ['url' => $url, 'response' => $response]);
+            return false;
+        }
+        return json_decode($response, true)['data'] ?? [];
+    }
 }

@@ -47,3 +47,8 @@ function bindNotification(string $title, string $server, string $subject, string
     ];
     return app('notifications')->bind($title, $server, $configs);
 }
+
+function getVendors()
+{
+    return app('notifications')->getVendors();
+}
